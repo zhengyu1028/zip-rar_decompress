@@ -121,21 +121,6 @@ func Un_zip(zipFile string, destDir string) error {
 	return nil
 }
 
-func mvfile(filelist []string, destdir string) error {
-	err := os.Mkdir(destdir, os.ModePerm)
-	if err != nil {
-		return err
-	}
-	for _, ele := range filelist {
-		if strings.Contains(ele, "网络设备") && strings.Contains(ele, ".xlsx") {
-			ind := strings.LastIndex(ele, "\\")
-			fn := ele[ind:]
-			err = os.Rename(ele, destdir+"\\"+fn)
-		}
-	}
-
-	return nil
-}
 
 func main() {
 	work_dir, _ := os.Getwd()
@@ -154,9 +139,5 @@ func main() {
 	if err != nil {
 		log.Fatalln()
 	}
-	fl2, err := dec.Tra_Dir(work_dir)
-	err = mvfile(fl2, work_dir+"\\"+"抽表")
-	if err != nil {
-		log.Fatalln(err)
-	}
+	
 }
